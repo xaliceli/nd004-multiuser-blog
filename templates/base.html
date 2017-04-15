@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">
+  	<link type="text/css" rel="stylesheet" href="/static/main.css">
+    <title>CS253 Blog</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="title">
+        <h1><a href="/blog/">CS253 Blog</a></h1>
+      </div>
+      <div class="actions">
+        Hello {{ display_user }}!
+
+        {% if logged_in %}
+          <a href="/logout">Logout</a>
+        {% else %}
+          <a href="/signup">Sign Up</a> | <a href="/login">Log In</a>          
+        {% endif %}
+      </div>
+    </header>
+
+    <main id="content">
+		{% block content %}
+		{% endblock %}
+    </main>
+
+  </body>
+
+</html>

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <a href="/blog/{{ post.key().id() }}/">&larr; Return to Post</a>
+
+    <h2>Edit your post!</h2>
+
+    <form method="post">
+      <label>
+        Subject:
+        <input type="text" name="subject" value="{{ post.subject }}">
+      </label>
+
+      <label>
+        Post:
+        <textarea name="content">{{ post.content }}</textarea>
+      </label>
+
+      <input type="submit">
+    </form>
+
+{% endblock %}

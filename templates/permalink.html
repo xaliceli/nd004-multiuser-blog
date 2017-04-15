@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{{ post.render() | safe }}
+
+	{% if logged_in %}
+		<div id="add_comment">
+			<form method="post">
+				<textarea name="comment"></textarea>
+				<input type="submit" value="Submit Comment">
+			</form>
+		</div>
+		<div id="comments">
+		</div>
+	{% endif %}
+
+	{% for comment in comments %}
+      	{{ comment.render() | safe }}
+    {% endfor %}
+
+{% endblock %}

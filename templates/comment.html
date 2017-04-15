@@ -1,0 +1,13 @@
+<article class="comment">
+  <div class="comment__header">
+    {{ comment.comment_author }} on {{ comment.comment_date.strftime("%b %d, %Y") }}
+  </div>
+  <div class="comment__content">
+  		{{ comment._render_text | safe }} 
+  </div>
+  <div class="comment__actions">
+  	<div class="comment__react">
+  	  	<a href="{{ comment.key().id() }}/edit">Edit</a>
+  		<a href="{{ comment.key().id() }}/delete">Delete</a>
+  </div>
+</article>

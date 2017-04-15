@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <a href="/blog/{{ comment.post }}/">&larr; Return to Post</a>
+
+    <h2>Edit your comment!</h2>
+
+    <form method="post">
+      <label>
+        Comment:
+        <textarea name="comment_content">{{ comment.comment_content }}</textarea>
+      </label>
+
+      <input type="submit">
+    </form>
+
+{% endblock %}

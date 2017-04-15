@@ -1,0 +1,22 @@
+<article class="post">
+  <div class="post__header">
+    <div class="post__subject"><a href="/blog/{{ post.key().id() }}/">{{ post.subject }}</a></div>
+    <div class="post__date">{{ post.author }} on {{ post.date.strftime("%b %d, %Y") }}</div>
+  </div>
+  <div class="post__content">
+    {{ post._render_text | safe }}
+  </div>
+  <div class="post__actions">
+  	<div class="post__react">
+  		{{ post.likes }} Likes
+  		<a href="/blog/{{ post.key().id() }}/like">Like</a>
+  		<a href="/blog/{{ post.key().id() }}/unlike">Unlike</a>
+  		<a href="/blog/{{ post.key().id() }}/">Permalink</a>
+  		<a href="/blog/{{ post.key().id() }}/#comments">Comments</a>
+  	</div>
+  	<div class="post__manage">
+    	  <a href="/blog/{{ post.key().id() }}/edit">Edit</a>
+    		<a href="/blog/{{ post.key().id() }}/delete">Delete</a>
+  	</div>
+  </div>
+</article>
