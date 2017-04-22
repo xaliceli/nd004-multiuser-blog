@@ -73,18 +73,22 @@ textarea {
     line-height: 1.25em;
 }
 
-input[type=submit] {
+input[type=submit], .button {
     margin-top: 20px;
     font-size: 18px;
-    color: #666;
+    color: #1b4f72;
     padding: 10px;
     border: 1px solid #ddd;
     background-color: #fff;
+    cursor: pointer;
 }
 
-input[type=submit]:hover {
-    color: #333;
-    border: 1px solid #333;
+input[type=submit]:hover, .button:hover {
+    border: 1px solid #1b4f72;
+}
+
+.button {
+    padding: 9px;
 }
 
 .post {

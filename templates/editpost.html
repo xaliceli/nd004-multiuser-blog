@@ -17,7 +17,7 @@
         <textarea name="content">{{ post.content }}</textarea>
       </label>
 
-      <input type="submit">
+      <input type="submit"> <a href="/blog/{{ post.key().id() }}/" class="button">Cancel</a>
     </form>
 
 {% endblock %}
