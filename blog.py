@@ -246,18 +246,19 @@ class PostUnlike(Handler):
         key = db.Key.from_path("Post", int(post_id), parent=blog_key())
         post = db.get(key)
 
-        active_user = self.read_user()
+        if post:
+            active_user = self.read_user()
 
-        if active_user:
-            if active_user != post.author and active_user in post.liked_by:
-                post.likes -= 1
-                post.liked_by.remove(active_user)
-                post.put()
-                self.redirect("/blog/")
+            if active_user:
+                if active_user != post.author and active_user in post.liked_by:
+                    post.likes -= 1
+                    post.liked_by.remove(active_user)
+                    post.put()
+                    self.redirect("/blog/")
+                else:
+                    self.render("permission_error.html")
             else:
-                self.render("permission_error.html")
-        else:
-            self.redirect("/login")
+                self.redirect("/login")
 
 
 class CommentEdit(Handler):
@@ -266,33 +267,35 @@ class CommentEdit(Handler):
                                parent=blog_key())
         comment = db.get(key)
 
-        active_user = self.read_user()
+        if comment:
+            active_user = self.read_user()
 
-        if active_user:
-            if active_user == comment.comment_author:
-                self.render("editcomment.html", comment=comment)
+            if active_user:
+                if active_user == comment.comment_author:
+                    self.render("editcomment.html", comment=comment)
+                else:
+                    self.render("permission_error.html")
             else:
-                self.render("permission_error.html")
-        else:
-            self.redirect("/login")
+                self.redirect("/login")
 
     def post(self, post_id, comment_id):
         key = db.Key.from_path("PostComment", int(comment_id),
                                parent=blog_key())
         comment = db.get(key)
 
-        active_user = self.read_user()
+        if comment:
+            active_user = self.read_user()
 
-        if active_user:
-            if active_user == comment.comment_author:
-                comment_content = self.request.get("comment_content")
-                comment.comment_content = comment_content
-                comment.put()
-                self.redirect("/blog/%s/" % str(post_id))
+            if active_user:
+                if active_user == comment.comment_author:
+                    comment_content = self.request.get("comment_content")
+                    comment.comment_content = comment_content
+                    comment.put()
+                    self.redirect("/blog/%s/" % str(post_id))
+                else:
+                    self.render("permission_error.html")
             else:
-                self.render("permission_error.html")
-        else:
-            self.redirect("/login")
+                self.redirect("/login")
 
 
 class CommentDel(Handler):
@@ -301,13 +304,17 @@ class CommentDel(Handler):
                                parent=blog_key())
         comment = db.get(key)
 
-        active_user = self.read_user()
+        if comment:
+            active_user = self.read_user()
 
-        if active_user == comment.comment_author:
-            comment.delete()
-            self.redirect("/blog/%s/" % str(post_id))
-        else:
-            self.render("permission_error.html")
+            if active_user:
+                if active_user == comment.comment_author:
+                    comment.delete()
+                    self.redirect("/blog/%s/" % str(post_id))
+                else:
+                    self.render("permission_error.html")
+            else:
+                self.redirect("/login")
 
 
 app = webapp2.WSGIApplication([('/', BlogWelcome),
